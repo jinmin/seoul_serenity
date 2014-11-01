@@ -30,7 +30,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     __tablename__ = 'users'
     username = Column(db.String(80), unique=True, nullable=False)
-    email = Column(db.String(80), unique=True, nullable=False)
+    email = Column(db.String(256), unique=True, nullable=False)
     #: The hashed password
     password = Column(db.String(128), nullable=True)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
@@ -38,6 +38,9 @@ class User(UserMixin, SurrogatePK, Model):
     last_name = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
+    
+    # minwook
+    # user_type = Column(db.Integer, default=0)
 
     def __init__(self, username, email, password=None, **kwargs):
         db.Model.__init__(self, username=username, email=email, **kwargs)
